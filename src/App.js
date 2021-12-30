@@ -1,39 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
 class PostIndex extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   displayPost = (e) => {
     e.preventDefault();
     const postId = e.currentTarget.dataset.id;
-    console.log("hey, let's show post " + postId);
     this.props.handlePostSelected(postId);
-    console.log("bye!");
   }
 
   render() {
@@ -55,14 +27,9 @@ class PostIndex extends React.Component {
 }
 
 class PostContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let content = null;
 
-    console.log(typeof(this.props.selectedPost));
     if (typeof(this.props.selectedPost) === 'undefined') {
       content = (
         <p>no post selected</p>
@@ -93,13 +60,9 @@ class App extends React.Component {
 
   handlePostSelected(selectedPostId) {
     let selectedPost = this.props.data.posts.filter((x) => {
-      let fuckyou = (x.id === selectedPostId);
-      // console.log("hey does " + x.id + " == " + selectedPostId + "? a:" + fuckyou);
-      return fuckyou;
+      return (x.id === selectedPostId);
     })[0];
     this.setState({selectedPostId: selectedPostId, selectedPost: selectedPost});
-    console.log("selectedPostId is now:" + this.state.selectedPostId);
-    console.log("selectedPost is now:" + this.state.selectedPost);
   }
 
   render() {
